@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cull & Collage — Tải app lọc ảnh & dàn trang</title>
+<meta name="description" content="Tải app Cull & Collage cho Windows và macOS — lọc ảnh và dàn trang album trong cùng một phần mềm. Ảnh xử lý ngay trên máy bạn.">
+<meta name="theme-color" content="#0F0F11">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cull & Collage — Tải app">
+<meta property="og:description" content="Lọc ảnh và dàn trang trong cùng một app. Dành cho Windows và macOS.">
+<meta property="og:url" content="https://cullcollage.com">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230F0F11'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='38' font-weight='700' fill='%23E8A33D' text-anchor='middle'%3EC%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap">
+<style>
+/* Trang tải app Cull & Collage — một cột, tối giản, tải về là tâm điểm. Nền tối + cam, Be Vietnam Pro. */
+:root{
+  --bg:#0F0F11; --panel:#161619; --panel2:#1C1C21; --line:#2A2A30;
+  --tx:#EDEDEF; --mut:#9A9AA3; --faint:#6E6E77;
+  --acc:#E8A33D; --acc-ink:#1A1306; --acc-soft:rgba(232,163,61,.12); --acc-line:rgba(232,163,61,.35);
+  --font:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+img{max-width:100%}
+body{
+  background:
+    radial-gradient(1100px 520px at 50% -8%, rgba(232,163,61,.10), transparent 60%),
+    var(--bg);
+  color:var(--tx); font-family:var(--font); line-height:1.55;
+  -webkit-font-smoothing:antialiased; min-height:100vh;
+}
+.wrap{
+  max-width:860px; margin:0 auto;
+  padding-left:max(20px,env(safe-area-inset-left,0px));
+  padding-right:max(20px,env(safe-area-inset-right,0px));
+}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--acc); outline-offset:3px; border-radius:4px}
+
+.top{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-block:26px 0}
+.brand{font-weight:800; font-size:15px; letter-spacing:.14em}
+.brand span{color:var(--mut); font-weight:600}
+.ver{
+  font-size:12px; font-weight:600; letter-spacing:.04em; color:var(--acc);
+  border:1px solid var(--acc-line); background:var(--acc-soft);
+  padding:4px 11px; border-radius:999px; font-variant-numeric:tabular-nums; white-space:nowrap;
+}
+
+.hero{padding-block:46px 30px; border-bottom:1px solid var(--line)}
+.hero h1{margin:0; font-size:clamp(44px,10vw,74px); font-weight:800; letter-spacing:-.02em; line-height:.98; text-wrap:balance}
+.hero h1 em{font-style:normal; color:var(--acc)}
+.lead{margin:18px 0 0; font-size:clamp(18px,3.4vw,22px); font-weight:600}
+.sub{margin:12px 0 0; color:var(--mut); max-width:52ch; font-size:15.5px}
+
+.primary{margin-top:28px}
+.btn-primary{
+  display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+  background:var(--acc); color:var(--acc-ink); font-weight:700; font-size:16px;
+  padding:14px 24px; border-radius:11px; transition:transform .12s ease, filter .12s ease;
+}
+.btn-primary:hover{filter:brightness(1.06); transform:translateY(-1px)}
+.btn-primary .arw{font-size:18px; line-height:1}
+.primary-hint{margin:10px 2px 0; color:var(--mut); font-size:13.5px}
+
+.dl-head{display:flex; align-items:baseline; justify-content:space-between; gap:12px; padding-block:30px 4px}
+.dl-head h2{margin:0; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
+.dl-head .pf{font-size:13px; color:var(--faint)}
+.downloads{display:grid; gap:12px; padding-bottom:4px}
+.dl{display:flex; align-items:center; gap:18px; flex-wrap:wrap; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:18px 20px}
+.dl.rec{border-color:var(--acc-line); background:linear-gradient(0deg,var(--acc-soft),var(--acc-soft)),var(--panel)}
+.dl-main{min-width:0; flex:1 1 220px}
+.dl-os{font-size:18px; font-weight:700; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.tag-rec{display:none; font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase; color:var(--acc-ink); background:var(--acc); padding:3px 9px; border-radius:999px}
+.dl.rec .tag-rec{display:inline-block}
+.dl-req{color:var(--mut); font-size:13.5px; margin-top:3px}
+.btn{display:inline-flex; align-items:center; gap:9px; text-decoration:none; white-space:nowrap; border:1px solid var(--line); background:var(--panel2); color:var(--tx); font-weight:600; font-size:14.5px; padding:11px 18px; border-radius:10px; transition:border-color .12s ease, background .12s ease}
+.btn:hover{border-color:var(--acc-line); background:#232329}
+.dl.rec .btn{background:var(--acc); color:var(--acc-ink); border-color:var(--acc)}
+.dl.rec .btn:hover{filter:brightness(1.06)}
+.sz{font-variant-numeric:tabular-nums; opacity:.78; font-weight:500}
+
+details.chip{margin:16px 0 0}
+details.chip summary{cursor:pointer; color:var(--mut); font-size:13.5px; list-style:none; display:inline-flex; align-items:center; gap:7px}
+details.chip summary::-webkit-details-marker{display:none}
+details.chip summary::before{content:"?"; display:inline-grid; place-items:center; width:18px; height:18px; border:1px solid var(--line); border-radius:50%; font-size:11px; font-weight:700; color:var(--acc)}
+details.chip[open] summary{color:var(--tx)}
+details.chip p{margin:10px 0 0; color:var(--mut); font-size:14px; max-width:60ch; padding-left:25px}
+details.chip b{color:var(--tx); font-weight:600}
+
+.features{padding-block:44px 8px; border-top:1px solid var(--line); margin-top:36px}
+.features h2{margin:0 0 22px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
+.fgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px 30px}
+.feat h3{margin:0; font-size:16.5px; font-weight:700; display:flex; align-items:center; gap:9px}
+.feat h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--acc); flex:none}
+.feat p{margin:7px 0 0; color:var(--mut); font-size:14px}
+
+.note{margin:40px 0 0; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px; display:grid; gap:12px}
+.note .row{display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--mut)}
+.note .row b{color:var(--tx); font-weight:600}
+.note .ic{color:var(--acc); flex:none; margin-top:1px; font-weight:700}
+
+footer{padding-block:38px 46px; margin-top:34px; border-top:1px solid var(--line); color:var(--faint); font-size:13px}
+footer .f1{color:var(--mut); font-weight:600}
+footer .f2{margin-top:5px}
+
+@media (max-width:640px){ .fgrid{grid-template-columns:1fr 1fr; gap:22px} .dl .btn{flex:1 1 auto; justify-content:center} }
+@media (max-width:430px){ .fgrid{grid-template-columns:1fr} }
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="brand">MTHANGLEE <span>STUDIO</span></div>
+    <div class="ver" id="ver">v1.1.83</div>
+  </header>
+
+  <section class="hero">
+    <h1>Cull <em>&amp;</em> Collage</h1>
+    <p class="lead">Lọc ảnh và dàn trang trong cùng một app.</p>
+    <p class="sub">Tự tìm ảnh mờ, tối, cháy sáng, nhắm mắt, trùng lặp — rồi dàn trang album ngay trong một phần mềm. Ảnh được xử lý trên máy bạn.</p>
+    <div class="primary" id="primaryWrap" hidden>
+      <a class="btn-primary" id="primaryBtn" href="#"><span id="primaryLabel">Tải về</span> <span class="arw">↓</span></a>
+      <p class="primary-hint" id="primaryHint"></p>
+    </div>
+  </section>
+
+  <div class="dl-head">
+    <h2>Chọn bản tải</h2>
+    <span class="pf">Windows · macOS</span>
+  </div>
+  <section class="downloads" aria-label="Các bản tải">
+    <article class="dl" data-key="win">
+      <div class="dl-main">
+        <div class="dl-os">Windows <span class="tag-rec">Máy bạn</span></div>
+        <div class="dl-req">Windows 10 &amp; 11 · 64-bit</div>
+      </div>
+      <a class="btn" data-dl href="https://github.com/mthanglee97dnvn/cullcollage-releases/releases/latest/download/MTHANGLEE_PhotoSift_Setup.exe">Tải .exe <span class="sz" data-sz>207 MB</span></a>
+    </article>
+
+    <article class="dl" data-key="arm">
+      <div class="dl-main">
+        <div class="dl-os">macOS — Apple Silicon <span class="tag-rec">Máy bạn</span></div>
+        <div class="dl-req">Chip Apple M1 trở lên · macOS 11+</div>
+      </div>
+      <a class="btn" data-dl href="https://github.com/mthanglee97dnvn/cullcollage-releases/releases/download/v1.1.83/MThanglee_CullCollage-1.1.83-macos-arm64.dmg">Tải .dmg <span class="sz" data-sz>188 MB</span></a>
+    </article>
+
+    <article class="dl" data-key="intel">
+      <div class="dl-main">
+        <div class="dl-os">macOS — Intel <span class="tag-rec">Máy bạn</span></div>
+        <div class="dl-req">Mac chip Intel · macOS 11+</div>
+      </div>
+      <a class="btn" data-dl href="https://github.com/mthanglee97dnvn/cullcollage-releases/releases/download/v1.1.83/MThanglee_CullCollage-1.1.83-macos-intel.dmg">Tải .dmg <span class="sz" data-sz>216 MB</span></a>
+    </article>
+  </section>
+
+  <details class="chip">
+    <summary>Không chắc máy Mac dùng chip nào?</summary>
+    <p>Bấm logo <b>Apple</b> ở góc trái màn hình → <b>Giới thiệu về máy Mac này</b>. Nếu thấy dòng <b>Chip Apple M1/M2/M3…</b> thì chọn bản <b>Apple Silicon</b>; nếu thấy <b>Bộ xử lý Intel</b> thì chọn bản <b>Intel</b>.</p>
+  </details>
+
+  <section class="features">
+    <h2>Tính năng</h2>
+    <div class="fgrid">
+      <div class="feat"><h3>Lọc ảnh tự động</h3><p>Ảnh mờ, tối, cháy sáng, nhắm mắt, trùng lặp.</p></div>
+      <div class="feat"><h3>Gom theo khuôn mặt</h3><p>Tìm nhanh ảnh của từng người trong show.</p></div>
+      <div class="feat"><h3>RAW · JPG · HEIC</h3><p>Chấm sao, gắn nhãn màu, ghi XMP cho Lightroom.</p></div>
+      <div class="feat"><h3>Dàn trang kéo thả</h3><p>Mẫu có sẵn, ảnh kéo dài qua nhiều slide.</p></div>
+      <div class="feat"><h3>Học layout từ ảnh mẫu</h3><p>Đưa ảnh bạn thích vào để tạo mẫu của riêng bạn.</p></div>
+      <div class="feat"><h3>Xuất đúng nhu cầu</h3><p>PNG, JPG đến 4000px, chỉnh DPI từ 72 đến 600.</p></div>
+    </div>
+  </section>
+
+  <section class="note" aria-label="Lưu ý">
+    <div class="row"><span class="ic">•</span><div><b>Riêng tư:</b> ảnh được xử lý ngay trên máy bạn. Chỉ các bộ lọc ảnh tối, cháy sáng, nhắm mắt cần kết nối Internet.</div></div>
+    <div class="row"><span class="ic">•</span><div><b>Lần đầu mở:</b> Windows (SmartScreen) hoặc macOS (Gatekeeper) có thể hiện cảnh báo — chọn <b>Vẫn chạy / More info → Run anyway</b>, hoặc trên Mac bấm chuột phải vào app → <b>Mở</b>. Xem file hướng dẫn cài đặt đi kèm.</div></div>
+  </section>
+
+  <footer>
+    <div class="f1">© 2026 Lê Minh Thắng — MTHANGLEE STUDIO</div>
+    <div class="f2">Trang tải tự cập nhật theo bản phát hành mới nhất.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var REPO='mthanglee97dnvn/cullcollage-releases';
+  var MATCH={
+    win:function(n){return /\.exe$/i.test(n);},
+    arm:function(n){return /arm64.*\.dmg$/i.test(n);},
+    intel:function(n){return /intel.*\.dmg$/i.test(n);}
+  };
+  function mb(b){return Math.round(b/1048576)+' MB';}
+  function cardFor(key){return document.querySelector('.dl[data-key="'+key+'"]');}
+  function setVer(tag){ if(tag) document.getElementById('ver').textContent = /^v/i.test(tag)?tag:('v'+tag); }
+
+  function applyAssets(assets){
+    ['win','arm','intel'].forEach(function(key){
+      var a=null;
+      for(var i=0;i<assets.length;i++){ if(MATCH[key](assets[i].name)){ a=assets[i]; break; } }
+      if(!a) return;
+      var card=cardFor(key); if(!card) return;
+      var link=card.querySelector('[data-dl]'); var sz=card.querySelector('[data-sz]');
+      if(link && a.browser_download_url) link.setAttribute('href', a.browser_download_url);
+      if(sz && a.size) sz.textContent = mb(a.size);
+    });
+  }
+
+  function detectOS(){
+    var p=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||'';
+    var ua=navigator.userAgent||'';
+    var key=null, label='', hint='';
+    if(/Win/i.test(p)||/Windows/i.test(ua)){
+      key='win'; label='Tải cho Windows';
+    } else if(/Mac/i.test(p)||/Mac OS X/i.test(ua)){
+      key='arm'; label='Tải cho macOS'; hint='Dùng máy Mac chip Intel (đời ~2020 trở về trước)? Chọn bản Intel bên dưới.';
+    }
+    if(!key) return;
+    var card=cardFor(key); if(!card) return;
+    card.classList.add('rec');
+    var href=card.querySelector('[data-dl]').getAttribute('href');
+    var btn=document.getElementById('primaryBtn');
+    btn.setAttribute('href', href);
+    document.getElementById('primaryLabel').textContent=label;
+    document.getElementById('primaryHint').textContent = hint || '';
+    document.getElementById('primaryWrap').hidden=false;
+  }
+
+  function finish(){ try{ detectOS(); }catch(e){} }
+
+  try{
+    fetch('https://api.github.com/repos/'+REPO+'/releases/latest',{headers:{'Accept':'application/vnd.github+json'}})
+      .then(function(r){ if(!r.ok) throw new Error('rate'); return r.json(); })
+      .then(function(d){ if(d.tag_name) setVer(d.tag_name); if(d.assets) applyAssets(d.assets); finish(); })
+      .catch(function(){ finish(); });
+  }catch(e){ finish(); }
+})();
+</script>
+</body>
+</html>
