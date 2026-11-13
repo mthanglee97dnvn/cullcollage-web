@@ -99,10 +99,26 @@ details.chip b{color:var(--tx); font-weight:600}
 .feat h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--acc); flex:none}
 .feat p{margin:7px 0 0; color:var(--mut); font-size:14px}
 
-.note{margin:40px 0 0; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px 22px; display:grid; gap:12px}
-.note .row{display:flex; gap:12px; align-items:flex-start; font-size:14px; color:var(--mut)}
-.note .row b{color:var(--tx); font-weight:600}
-.note .ic{color:var(--acc); flex:none; margin-top:1px; font-weight:700}
+.install{padding-block:44px 8px; border-top:1px solid var(--line); margin-top:36px}
+.install h2{margin:0 0 20px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
+.guides{display:grid; gap:12px}
+.guide{background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden}
+.guide summary{cursor:pointer; list-style:none; display:flex; align-items:baseline; gap:12px; padding:16px 20px; font-weight:700; font-size:16px}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary::after{content:"+"; margin-left:auto; color:var(--acc); font-weight:700; font-size:20px; line-height:1}
+.guide[open] summary::after{content:"–"}
+.guide summary .g-sub{font-size:13px; font-weight:500; color:var(--mut)}
+.guide ol{margin:0; padding:2px 22px 20px 42px; display:grid; gap:12px; color:var(--mut); font-size:14.5px; line-height:1.6}
+.guide ol b{color:var(--tx); font-weight:600}
+.guide li::marker{color:var(--acc); font-weight:700}
+.way{margin-top:8px; padding:12px 14px; background:var(--panel2); border:1px solid var(--line); border-radius:10px}
+.hintline{margin-top:8px; font-size:13px; color:var(--faint)}
+.code{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin:8px 0; padding:10px 12px; background:#0C0C0E; border:1px solid var(--line); border-radius:8px}
+.code code{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace; font-size:12.5px; color:var(--tx); word-break:break-all; min-width:0}
+.copy{flex:none; margin-left:auto; border:1px solid var(--acc-line); background:var(--acc-soft); color:var(--acc); font:inherit; font-size:12.5px; font-weight:600; padding:6px 12px; border-radius:7px; cursor:pointer; white-space:nowrap}
+.copy:hover{background:rgba(232,163,61,.2)}
+.priv{margin:18px 2px 0; color:var(--mut); font-size:14px}
+.priv b{color:var(--tx); font-weight:600}
 
 footer{padding-block:38px 46px; margin-top:34px; border-top:1px solid var(--line); color:var(--faint); font-size:13px}
 footer .f1{color:var(--mut); font-weight:600}
@@ -177,9 +193,36 @@ footer .f2{margin-top:5px}
     </div>
   </section>
 
-  <section class="note" aria-label="Lưu ý">
-    <div class="row"><span class="ic">•</span><div><b>Riêng tư:</b> ảnh được xử lý ngay trên máy bạn. Chỉ các bộ lọc ảnh tối, cháy sáng, nhắm mắt cần kết nối Internet.</div></div>
-    <div class="row"><span class="ic">•</span><div><b>Lần đầu mở:</b> Windows (SmartScreen) hoặc macOS (Gatekeeper) có thể hiện cảnh báo — chọn <b>Vẫn chạy / More info → Run anyway</b>, hoặc trên Mac bấm chuột phải vào app → <b>Mở</b>. Xem file hướng dẫn cài đặt đi kèm.</div></div>
+  <section class="install" aria-label="Hướng dẫn cài đặt">
+    <h2>Cài đặt &amp; kích hoạt</h2>
+    <div class="guides">
+      <details class="guide">
+        <summary>Windows <span class="g-sub">Windows 10 &amp; 11</span></summary>
+        <ol>
+          <li>Tải file <b>.exe</b> ở trên, bấm đúp để chạy. Nếu trình duyệt hỏi giữ hay xoá, chọn <b>Giữ lại (Keep)</b>.</li>
+          <li>Nếu hiện bảng xanh <b>SmartScreen</b> ("Windows đã bảo vệ PC của bạn"): bấm <b>Thông tin thêm (More info)</b> → <b>Vẫn chạy (Run anyway)</b>. App chưa mua chữ ký số nên Windows cảnh báo vậy, không phải virus.</li>
+          <li>Bấm <b>Cài đặt</b> và đợi xong. App tạo biểu tượng trên Desktop và menu Start.</li>
+          <li>Mở app → app hiện <b>mã máy</b>. Gửi mã này cho MThanglee Studio để nhận <b>key</b>, dán key vào ô rồi bấm <b>Kích hoạt</b>. Mỗi máy có mã riêng.</li>
+        </ol>
+      </details>
+      <details class="guide">
+        <summary>macOS <span class="g-sub">Apple Silicon &amp; Intel · macOS 11+</span></summary>
+        <ol>
+          <li><b>Chọn đúng bản chip:</b> bấm logo  Apple → <b>Giới thiệu về máy Mac này</b>. Thấy <b>Chip Apple M1/M2/M3…</b> → tải bản <b>Apple Silicon</b>; thấy <b>Bộ xử lý Intel</b> → tải bản <b>Intel</b>. Tải nhầm thì app không mở được.</li>
+          <li>Mở file <b>.dmg</b> → kéo biểu tượng <b>MThanglee CullCollage</b> thả vào thư mục <b>Applications</b>.</li>
+          <li><b>Cho phép mở lần đầu</b> (app chưa ký nên macOS chặn) — chọn 1 trong 2 cách:
+            <div class="way"><b>Cách A — nhanh &amp; ổn định nhất:</b> mở <b>Terminal</b> (⌘ + Space, gõ Terminal, Enter), dán lệnh sau rồi nhấn Enter:
+              <div class="code"><code id="cmd">xattr -dr com.apple.quarantine "/Applications/MThanglee CullCollage.app"</code><button class="copy" data-copy="cmd" type="button">Sao chép</button></div>
+              Chạy xong không báo gì là thành công. Rồi mở app bình thường.
+            </div>
+            <div class="way"><b>Cách B — không cần Terminal:</b> mở app một lần → bấm <b>OK</b> (đừng bấm "Chuyển vào Thùng rác") → logo  Apple → <b>Cài đặt Hệ thống</b> → <b>Quyền riêng tư &amp; Bảo mật</b> → kéo xuống mục Bảo mật → bấm <b>Vẫn mở (Open Anyway)</b> → nhập mật khẩu máy.</div>
+            <div class="hintline">macOS 15 Sequoia trở lên: cách chuột phải → Mở không còn vượt được bảng chặn — hãy dùng Cách A hoặc B.</div>
+          </li>
+          <li>Mở app (lần đầu mất ~10–30 giây) → app hiện <b>mã máy</b>. Gửi cho MThanglee Studio để nhận <b>key</b>, dán vào rồi <b>Kích hoạt</b>.</li>
+        </ol>
+      </details>
+    </div>
+    <p class="priv"><b>Riêng tư:</b> ảnh được xử lý ngay trên máy bạn. Chỉ các bộ lọc ảnh tối, cháy sáng, nhắm mắt cần kết nối Internet.</p>
   </section>
 
   <footer>
@@ -240,6 +283,18 @@ footer .f2{margin-top:5px}
       .then(function(d){ if(d.tag_name) setVer(d.tag_name); if(d.assets) applyAssets(d.assets); finish(); })
       .catch(function(){ finish(); });
   }catch(e){ finish(); }
+})();
+</script>
+<script>
+(function(){
+  document.addEventListener('click',function(e){
+    var b=e.target.closest ? e.target.closest('.copy') : null; if(!b) return;
+    var el=document.getElementById(b.getAttribute('data-copy')); if(!el) return;
+    var txt=el.textContent, orig=b.textContent;
+    function ok(){ b.textContent='Đã sao chép ✓'; setTimeout(function(){ b.textContent=orig; },1600); }
+    function sel(){ try{ var r=document.createRange(); r.selectNodeContents(el); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand&&document.execCommand('copy'); ok(); }catch(_){} }
+    if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(ok).catch(sel); } else { sel(); }
+  });
 })();
 </script>
 </body>
