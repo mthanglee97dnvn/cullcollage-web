@@ -92,6 +92,13 @@ details.chip[open] summary{color:var(--tx)}
 details.chip p{margin:10px 0 0; color:var(--mut); font-size:14px; max-width:60ch; padding-left:25px}
 details.chip b{color:var(--tx); font-weight:600}
 
+.shots{padding-block:44px 0; border-top:1px solid var(--line); margin-top:36px}
+.shots h2{margin:0 0 18px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
+.shots .grid{display:grid; gap:26px}
+.shot figure{margin:0}
+.shot img{width:100%; height:auto; display:block; border:1px solid var(--line); border-radius:12px; background:var(--panel)}
+.shot figcaption{margin-top:11px; color:var(--mut); font-size:14px; line-height:1.5}
+.shot figcaption b{color:var(--tx); font-weight:700}
 .features{padding-block:44px 8px; border-top:1px solid var(--line); margin-top:36px}
 .features h2{margin:0 0 22px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
 .fgrid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px 30px}
@@ -180,6 +187,20 @@ footer .f2{margin-top:5px}
     <summary>Không chắc máy Mac dùng chip nào?</summary>
     <p>Bấm logo <b>Apple</b> ở góc trái màn hình → <b>Giới thiệu về máy Mac này</b>. Nếu thấy dòng <b>Chip Apple M1/M2/M3…</b> thì chọn bản <b>Apple Silicon</b>; nếu thấy <b>Bộ xử lý Intel</b> thì chọn bản <b>Intel</b>.</p>
   </details>
+
+  <section class="shots" aria-label="Giao diện">
+    <h2>Giao diện</h2>
+    <div class="grid">
+      <figure class="shot">
+        <img src="assets/loc-anh.jpg" width="1600" height="865" loading="lazy" decoding="async" alt="Màn hình Lọc ảnh: lưới ảnh cưới có chấm sao, nhãn Trùng/Tốt nhất, ảnh bị loại và bảng thông số bên phải">
+        <figcaption><b>Lọc ảnh</b> — chấm sao, gom theo khuôn mặt, tự đánh dấu ảnh trùng · mờ · cháy sáng, xem thông số &amp; histogram từng ảnh.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/dan-trang.jpg" width="1600" height="876" loading="lazy" decoding="async" alt="Màn hình Dàn trang: kéo thả ảnh cưới vào các mẫu bố cục slide để dàn album">
+        <figcaption><b>Dàn trang</b> — kéo thả ảnh vào mẫu bố cục có sẵn, dàn album nhiều slide, xuất đúng kích thước.</figcaption>
+      </figure>
+    </div>
+  </section>
 
   <section class="features">
     <h2>Tính năng</h2>
