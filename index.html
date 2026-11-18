@@ -119,6 +119,51 @@ html.js .reveal.in{opacity:1; transform:none}
 .layout-demo.in{animation:float 6.5s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)}}
 
+/* Gu chọn ảnh demo: ✦ lần lượt sáng lên trên những tấm hợp gu */
+.gu-demo{background:var(--panel2); padding:16px}
+.gu-bar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; font-size:13.5px; color:var(--mut)}
+.gu-n{color:var(--tx); font-weight:700; background:#0C0C0E; border:1px solid var(--line); border-radius:8px; padding:5px 11px; font-variant-numeric:tabular-nums}
+.gu-go{margin-left:auto; background:var(--acc); color:var(--acc-ink); font-weight:800; font-size:13px; padding:7px 13px; border-radius:9px}
+.gu-grid{display:grid; grid-template-columns:repeat(6,1fr); gap:5px; margin-top:14px}
+.gu-t{position:relative; aspect-ratio:4/5; border-radius:6px; overflow:hidden; background:#000}
+.gu-t img{width:100%; height:100%; object-fit:cover; display:block; transition:opacity .5s ease, filter .5s ease}
+.gu-t::after{content:"✦"; position:absolute; left:5px; top:5px; width:20px; height:20px; display:grid; place-items:center; border-radius:50%; font-size:11px; color:var(--acc); background:rgba(15,15,17,.85); border:1px solid var(--acc-line); opacity:0; transform:scale(.4); transition:opacity .35s ease, transform .35s cubic-bezier(.3,1.6,.5,1)}
+.gu-demo.picked .gu-t.y::after{opacity:1; transform:none}
+.gu-demo.picked .gu-t.y{box-shadow:0 0 0 2px var(--acc)}
+.gu-demo.picked .gu-t:not(.y) img{opacity:.38; filter:grayscale(.6)}
+.gu-foot{margin-top:13px; font-size:13px; color:var(--mut)}
+.gu-foot b{color:var(--acc); font-weight:700}
+
+/* Điện thoại + iPad */
+.dev-demo{position:relative; padding:0 0 9% 0}
+.ipad{border-radius:22px; padding:10px; background:#202026; border:1px solid #34343C; box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.ipad img{display:block; width:100%; height:auto; border-radius:13px}
+.phone{position:absolute; right:-2%; bottom:0; width:30%; border-radius:26px; padding:6px; background:#202026; border:1px solid #3A3A42; box-shadow:0 24px 50px rgba(0,0,0,.6)}
+.phone img{display:block; width:100%; height:auto; border-radius:21px}
+.dev-demo.in .phone{animation:float 6.5s ease-in-out infinite}
+
+/* Điểm mạnh */
+.why{padding-block:62px 8px; border-top:1px solid var(--line); margin-top:60px}
+.why>h2, .all>h2{margin:0 0 26px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
+.why-grid{display:grid; grid-template-columns:1fr 1fr; gap:34px 48px}
+.why-item h3{margin:0; font-size:clamp(19px,2.6vw,23px); font-weight:800; letter-spacing:-.01em; line-height:1.2}
+.why-item p{margin:9px 0 0; color:var(--mut); font-size:15px; max-width:46ch}
+.why-item p b{color:var(--tx); font-weight:600}
+.why-item.lead-item{grid-column:1/-1; padding:24px 26px; border:1px solid var(--acc-line); background:linear-gradient(0deg,var(--acc-soft),var(--acc-soft)),var(--panel); border-radius:16px}
+.why-item.lead-item p{max-width:70ch}
+
+/* Tất cả tính năng */
+.all{padding-block:62px 8px; border-top:1px solid var(--line); margin-top:60px}
+.all-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:30px 28px}
+.all-col h3{margin:0 0 12px; font-size:16.5px; font-weight:700; display:flex; align-items:center; gap:9px}
+.all-col h3::before{content:""; width:7px; height:7px; border-radius:2px; background:var(--acc); flex:none}
+.all-col ul{list-style:none; margin:0; padding:0; display:grid; gap:9px}
+.all-col li{color:var(--mut); font-size:14px; line-height:1.45}
+.all-col li b{color:var(--tx); font-weight:600}
+.new{display:inline-block; margin-left:6px; font-size:10.5px; font-weight:700; color:var(--acc-ink); background:var(--acc); padding:1px 7px; border-radius:999px; vertical-align:2px}
+@media (max-width:900px){ .all-grid{grid-template-columns:1fr 1fr} }
+@media (max-width:640px){ .gu-grid{grid-template-columns:repeat(4,1fr)} .why-grid{grid-template-columns:1fr; gap:28px} .all-grid{grid-template-columns:1fr} }
+
 /* small features grid */
 .features{padding-block:62px 8px; border-top:1px solid var(--line); margin-top:60px}
 .features h2{margin:0 0 22px; font-size:13px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--mut)}
@@ -191,6 +236,7 @@ footer .f2{margin-top:5px}
   .cull-demo .scan{display:none}
   .cull-demo .badge{opacity:1; transform:none}
   .layout-demo .fly, .layout-demo .cursor{opacity:1}
+  .gu-demo .gu-t.y::after{opacity:1; transform:none}
 }
 </style>
 </head>
@@ -205,10 +251,10 @@ footer .f2{margin-top:5px}
     <div class="eyebrow">Phần mềm cho nhiếp ảnh cưới</div>
     <h1>Cull <em>&amp;</em> Collage</h1>
     <p class="lead">Lọc ảnh và dàn trang trong cùng một app.</p>
-    <p class="sub">Tự tìm ảnh mờ, tối, cháy sáng, nhắm mắt, trùng lặp — rồi dàn trang album ngay trong một phần mềm. Ảnh được xử lý trên máy bạn.</p>
+    <p class="sub">Tự tìm ảnh mờ, tối, cháy sáng, nhắm mắt, trùng lặp, đề xuất ảnh đẹp theo gu của bạn — rồi dàn trang album ngay trong một phần mềm. Lọc được cả trên điện thoại. Ảnh được xử lý trên máy bạn.</p>
     <div class="cta" id="primaryWrap">
       <a class="btn-primary" id="primaryBtn" href="#dl"><span id="primaryLabel">Tải về</span> <span class="arw">↓</span></a>
-      <a class="ghost" href="#dl">Xem tất cả bản tải</a>
+      <a class="ghost" href="#tinh-nang">Xem tất cả tính năng</a>
       <p class="primary-hint" id="primaryHint"></p>
     </div>
   </section>
@@ -291,16 +337,141 @@ footer .f2{margin-top:5px}
     </div>
   </section>
 
-  <!-- small features -->
-  <section class="features">
-    <h2>Và nhiều hơn nữa</h2>
-    <div class="fgrid">
-      <div class="feat-card"><h3>RAW · JPG · HEIC</h3><p>Chấm sao, gắn nhãn màu, ghi XMP cho Lightroom.</p></div>
-      <div class="feat-card"><h3>Xử lý trên máy bạn</h3><p>Ảnh không rời máy. Chỉ vài bộ lọc nâng cao cần Internet.</p></div>
-      <div class="feat-card"><h3>Tự cập nhật</h3><p>Có bản mới, app báo ngay — một cú bấm là xong.</p></div>
-      <div class="feat-card"><h3>Bản quyền vĩnh viễn</h3><p>Kích hoạt bằng key theo máy, dùng mãi mãi.</p></div>
-      <div class="feat-card"><h3>Lọc nhanh bằng phím</h3><p>Chấm sao 1–5, phím X loại ảnh, ⌘/Ctrl 1–2 chuyển tab.</p></div>
-      <div class="feat-card"><h3>Hỗ trợ NAS</h3><p>Mở thẳng thư mục ảnh trên ổ mạng của studio.</p></div>
+  <!-- Feature 4: gu chọn ảnh -->
+  <section class="feat">
+    <div class="feat-row rev">
+      <div class="feat-text reveal">
+        <div class="eyebrow">Chọn ảnh đẹp theo gu</div>
+        <h2>Gõ số ảnh cần giao, app chọn giúp</h2>
+        <p>Cần giao 400 tấm? Gõ 400 — app đề xuất đúng chừng đó tấm theo gu của chính bạn. Bạn chấm sao càng nhiều đám, đề xuất càng giống mắt bạn.</p>
+        <ul class="ticks">
+          <li><b>Học từ sao bạn chấm</b> — mỗi đám chấm xong là app hiểu gu thêm một chút</li>
+          <li><b>Đọc sao cũ</b> từ Photo Mechanic, Lightroom (.xmp) để học ngay từ ngày đầu</li>
+          <li>Chỉ <b>đề xuất</b>, không tự chấm — bạn vẫn là người quyết</li>
+        </ul>
+      </div>
+      <div class="feat-visual reveal">
+        <div class="demo gu-demo" id="guDemo">
+          <div class="gu-bar">Chọn khoảng <span class="gu-n">400</span> tấm <span class="gu-go">✦ Đề xuất</span></div>
+          <div class="gu-grid">
+            <div class="gu-t y"><img src="assets/gu/g0.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g1.jpg" alt=""></div>
+            <div class="gu-t y"><img src="assets/gu/g2.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g3.jpg" alt=""></div>
+            <div class="gu-t y"><img src="assets/gu/g4.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g5.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g6.jpg" alt=""></div>
+            <div class="gu-t y"><img src="assets/gu/g7.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g8.jpg" alt=""></div>
+            <div class="gu-t y"><img src="assets/gu/g9.jpg" alt=""></div>
+            <div class="gu-t"><img src="assets/gu/g10.jpg" alt=""></div>
+            <div class="gu-t y"><img src="assets/gu/g11.jpg" alt=""></div>
+          </div>
+          <div class="gu-foot">Đang dùng gu của bạn — học từ 12 đám, khớp <b>78%</b> với ảnh bạn tự chọn</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 5: điện thoại + iPad -->
+  <section class="feat">
+    <div class="feat-row">
+      <div class="feat-text reveal">
+        <div class="eyebrow">Lọc trên điện thoại &amp; iPad</div>
+        <h2>Nằm sofa vẫn lọc xong một đám</h2>
+        <p>Mở app trên máy tính, điện thoại cùng Wi-Fi vào là lọc được ngay — không cần cài thêm gì. Mọi sao chấm trên điện thoại hiện luôn trên máy tính.</p>
+        <ul class="ticks">
+          <li><b>Lưới ảnh nhanh</b>, gộp loạt trùng, lọc theo người, theo lỗi</li>
+          <li><b>Vuốt để chấm</b>, chụm hai ngón soi nét tới 100% ảnh gốc</li>
+          <li>Tự động lọc, Chọn ảnh đẹp, hoàn tác — có đủ như trên máy</li>
+          <li><b>iPad</b>: lưới và ảnh lớn chia đôi màn hình</li>
+        </ul>
+      </div>
+      <div class="feat-visual reveal">
+        <div class="demo dev-demo" style="border:none;background:none;box-shadow:none;overflow:visible">
+          <div class="ipad"><img src="assets/ipad.jpg" width="1400" height="973" alt="Lọc ảnh trên iPad: lưới ảnh bên trái, ảnh lớn bên phải với nút Loại, Giữ và chấm sao" loading="lazy"></div>
+          <div class="phone"><img src="assets/dien-thoai.jpg" width="600" height="1298" alt="Lọc ảnh trên điện thoại: lưới 4 cột với ảnh đã chấm sao, ảnh bị loại vì mờ hoặc nhắm mắt" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Điểm mạnh -->
+  <section class="why">
+    <h2>Vì sao chọn Cull &amp; Collage</h2>
+    <div class="why-grid">
+      <div class="why-item lead-item reveal">
+        <h3>Làm ra từ một studio phóng sự cưới thật</h3>
+        <p>Cull &amp; Collage được làm và dùng mỗi ngày tại <b>MThanglee Studio</b> ở Đà Nẵng — mùa cao điểm gần 60 đám mỗi tháng. Mỗi tính năng trong app đều bắt nguồn từ một lần giao ảnh thật cho cô dâu chú rể.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Một app cho cả quy trình</h3>
+        <p>Lọc, chọn, dàn trang, xuất ảnh — làm liền một mạch, không phải chuyển file qua lại giữa nhiều phần mềm.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Ảnh nằm yên trên máy bạn</h3>
+        <p>Mọi xử lý chạy ngay trên máy, ảnh khách không bị tải lên đâu cả. Mở thẳng thư mục trên ổ NAS của studio.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Nhanh với vài nghìn ảnh</h3>
+        <p>Lưới ảnh chỉ dựng phần đang nhìn thấy nên cuộn vẫn mượt với cả show 3.000 tấm RAW + JPEG.</p>
+      </div>
+      <div class="why-item reveal">
+        <h3>Mua một lần, dùng mãi</h3>
+        <p>Bản quyền vĩnh viễn <b>500.000đ</b>, chuyển khoản là key tự kích hoạt. Có bản mới, app tự báo — một cú bấm là cập nhật.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tất cả tính năng -->
+  <section class="all" id="tinh-nang">
+    <h2>Tất cả tính năng trong app</h2>
+    <div class="all-grid">
+      <div class="all-col">
+        <h3>Lọc ảnh</h3>
+        <ul>
+          <li><b>Tự động lọc</b> mờ, tối, cháy sáng, nhắm mắt — 3 mức Nhẹ, Vừa, Mạnh</li>
+          <li><b>Gộp ảnh trùng</b>, tự giữ tấm tốt nhất, ưu tiên tấm có nụ cười</li>
+          <li><b>Gom theo khuôn mặt</b>, đặt tên từng người</li>
+          <li>Tab <b>Ảnh highlight</b>: tự nhận cô dâu, chú rể</li>
+          <li>Phân loại ảnh decor, chi tiết, vật phẩm</li>
+          <li><b>Ô điểm lấy nét</b> trên ảnh (phím F)</li>
+          <li>Điểm chất lượng, histogram, thông số chụp</li>
+          <li>Tìm nhanh theo mã số ảnh</li>
+        </ul>
+      </div>
+      <div class="all-col">
+        <h3>Chấm &amp; chọn</h3>
+        <ul>
+          <li><b>Chọn ảnh đẹp theo gu</b>, đề xuất đúng số ảnh cần giao</li>
+          <li>Chấm sao 1–5, phím X loại ảnh, nhãn màu</li>
+          <li>Ghi <b>XMP cho Lightroom</b>, đọc sao cũ từ Photo Mechanic</li>
+          <li><b>Lọc trên điện thoại, iPad</b> cùng Wi-Fi <span class="new">Mới</span></li>
+          <li>Hoàn tác mọi thao tác chấm, lọc</li>
+          <li>Sắp theo tên, giờ chụp, loại file — có Đảo chiều</li>
+        </ul>
+      </div>
+      <div class="all-col">
+        <h3>Nhiều máy ảnh</h3>
+        <ul>
+          <li><b>Đồng bộ giờ</b> các máy bằng ảnh chụp đồng hồ</li>
+          <li>Hoặc ghép theo <b>khoảnh khắc chung</b> hai máy cùng chụp</li>
+          <li><b>Đếm cặp RAW–JPEG</b>, lọc ra file lẻ cặp</li>
+          <li>Đọc RAW, JPG, HEIC</li>
+          <li>Mở thẳng thư mục trên <b>ổ NAS</b></li>
+        </ul>
+      </div>
+      <div class="all-col">
+        <h3>Dàn trang &amp; xuất</h3>
+        <ul>
+          <li><b>Mẫu bố cục</b> có sẵn, hoặc tạo mẫu từ ảnh bạn thích</li>
+          <li>Ảnh kéo dài mượt qua nhiều slide</li>
+          <li>Chèn <b>logo</b> từ PNG hoặc PSD</li>
+          <li>Xuất PNG/JPG đến 4000px, DPI 72–600, xem trước dung lượng</li>
+          <li>Lưu thẳng vào thư mục, sao lưu dự án</li>
+          <li>Windows, macOS chip Apple và Intel</li>
+        </ul>
+      </div>
     </div>
   </section>
 
@@ -440,6 +611,17 @@ document.documentElement.className+=' js';
     }); },{threshold:.25});
     fio.observe(fd);
   } else if(fd){ fd.classList.add('grouped'); var fs=[].slice.call(fd.querySelectorAll('.face')); var g=[[16,30],[26,22],[22,50],[48,30],[58,24],[52,50],[78,34],[84,52]]; fs.forEach(function(f,i){ f.style.left=g[i][0]+'%'; f.style.top=g[i][1]+'%'; }); }
+
+  // gu demo: lặp chọn / bỏ
+  var gd=document.getElementById('guDemo');
+  if(gd && !reduce){
+    var gt=null;
+    var gio=new IntersectionObserver(function(es){ es.forEach(function(en){
+      if(en.isIntersecting && !gt){ setTimeout(function(){gd.classList.add('picked');},700); gt=setInterval(function(){ gd.classList.toggle('picked'); },2800); }
+      else if(!en.isIntersecting && gt){ clearInterval(gt); gt=null; }
+    }); },{threshold:.3});
+    gio.observe(gd);
+  } else if(gd){ gd.classList.add('picked'); }
 
 })();
 </script>
