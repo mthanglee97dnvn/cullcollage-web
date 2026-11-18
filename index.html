@@ -110,7 +110,7 @@ html.js .reveal.in{opacity:1; transform:none}
 
 /* Face clustering demo */
 .face-demo{aspect-ratio:16/10; background:radial-gradient(500px 300px at 50% 40%, rgba(232,163,61,.07), transparent 65%), var(--panel2); box-shadow:0 30px 70px rgba(0,0,0,.4)}
-.face{position:absolute; width:16%; aspect-ratio:1; border-radius:50%; background-size:132%; background-position:center 46%; border:2px solid rgba(255,255,255,.14); box-shadow:0 8px 20px rgba(0,0,0,.4); transform:translate(-50%,-50%); transition:left 1.15s cubic-bezier(.3,.8,.25,1), top 1.15s cubic-bezier(.3,.8,.25,1), border-color .6s ease}
+.face{position:absolute; width:19%; aspect-ratio:1; border-radius:50%; background-size:cover; background-position:center; border:2px solid rgba(255,255,255,.14); box-shadow:0 8px 20px rgba(0,0,0,.4); transform:translate(-50%,-50%); transition:left 1.15s cubic-bezier(.3,.8,.25,1), top 1.15s cubic-bezier(.3,.8,.25,1), border-color .6s ease}
 .face-demo.grouped .face{border-color:var(--acc-line)}
 .glabel{position:absolute; transform:translate(-50%,-50%); font-size:11.5px; font-weight:700; color:var(--acc); background:var(--acc-soft); border:1px solid var(--acc-line); padding:3px 10px; border-radius:999px; opacity:0; transition:opacity .5s ease; white-space:nowrap}
 .face-demo.grouped .glabel{opacity:1}
@@ -308,9 +308,9 @@ footer .f2{margin-top:5px}
           <div class="face" style="background-image:url(assets/faces/f6.jpg)"></div>
           <div class="face" style="background-image:url(assets/faces/f7.jpg)"></div>
           <div class="face" style="background-image:url(assets/faces/f8.jpg)"></div>
-          <span class="glabel" style="left:22%; top:16%">Cô dâu</span>
-          <span class="glabel" style="left:52%; top:16%">Chú rể</span>
-          <span class="glabel" style="left:80%; top:22%">Khách</span>
+          <span class="glabel" style="left:20%; top:20%">Cô dâu</span>
+          <span class="glabel" style="left:53%; top:20%">Chú rể</span>
+          <span class="glabel" style="left:83%; top:25%">Khách</span>
         </div>
       </div>
     </div>
@@ -599,8 +599,8 @@ document.documentElement.className+=' js';
   var fd=document.getElementById('faceDemo');
   if(fd && !reduce){
     var faces=[].slice.call(fd.querySelectorAll('.face'));
-    var scatter=[[12,22],[72,14],[40,40],[86,30],[18,72],[56,68],[32,84],[80,74]];
-    var group =[[16,30],[26,22],[22,50],[48,30],[58,24],[52,50],[78,34],[84,52]];
+    var scatter=[[14,22],[72,20],[42,48],[86,44],[16,78],[58,76],[32,84],[84,80]];
+    var group =[[13,46],[28,42],[20,70],[46,46],[61,42],[53,70],[80,47],[86,72]];
     function set(a){ faces.forEach(function(f,i){ f.style.left=a[i][0]+'%'; f.style.top=a[i][1]+'%'; }); }
     set(scatter);
     var on=false, grouped=false, timer=null;
@@ -610,7 +610,7 @@ document.documentElement.className+=' js';
       else if(!en.isIntersecting && timer){ clearInterval(timer); timer=null; }
     }); },{threshold:.25});
     fio.observe(fd);
-  } else if(fd){ fd.classList.add('grouped'); var fs=[].slice.call(fd.querySelectorAll('.face')); var g=[[16,30],[26,22],[22,50],[48,30],[58,24],[52,50],[78,34],[84,52]]; fs.forEach(function(f,i){ f.style.left=g[i][0]+'%'; f.style.top=g[i][1]+'%'; }); }
+  } else if(fd){ fd.classList.add('grouped'); var fs=[].slice.call(fd.querySelectorAll('.face')); var g=[[13,46],[28,42],[20,70],[46,46],[61,42],[53,70],[80,47],[86,72]]; fs.forEach(function(f,i){ f.style.left=g[i][0]+'%'; f.style.top=g[i][1]+'%'; }); }
 
   // gu demo: lặp chọn / bỏ
   var gd=document.getElementById('guDemo');
